@@ -17,7 +17,7 @@ This repository contains all my practice YAML manifests as I learn Kubernetes.
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR-USERNAME/kubernetes-learning.git
+git clone https://github.com/ApsarShaik888/kubernetes-cluster.git
 
 # Apply any manifest
 kubectl apply -f 01-pods/simple-pod.yaml
