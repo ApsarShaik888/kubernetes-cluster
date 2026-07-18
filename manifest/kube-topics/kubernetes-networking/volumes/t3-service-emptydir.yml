@@ -1,0 +1,13 @@
+#create a service for a deployment with shared volumes between pod and container i.e emptyDir
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: t3-service-emptydir
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    obj-type: my-dep-vp
+  type: LoadBalancer

@@ -1,0 +1,33 @@
+#create a deployment with redis 
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: rds-deploy-app
+  labels:
+    obj-type: rd-app   #deployment label
+    version: v1.0.0    #deployment version
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      obj-type: rd-app
+  template:
+    metadata:
+      labels:
+        obj-type: rd-app   #pods label
+        version: v1.0.0    #pod version
+    spec:
+      containers:
+        - name: rds-container1
+          image: redis:alpine
+          ports:
+            - containerPort: 6379
+              name: redis-port
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"

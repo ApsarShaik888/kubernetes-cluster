@@ -1,0 +1,15 @@
+#create a pod backend 
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: backendpod
+  labels:
+    app: App1
+    env: dev
+    tier: backend
+spec:
+  containers:
+    - name: backend-app
+      image: nginx
+      command: ["/bin/bash","-c","while true; do echo Hello, Welcome to backend Application; sleep 5; done"]

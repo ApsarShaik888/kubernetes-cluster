@@ -1,0 +1,16 @@
+#create a service for the deployment for a simple web app
+#
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-webapp-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector: 
+   obj-app: s-web
+  type: LoadBalancer
+    
+

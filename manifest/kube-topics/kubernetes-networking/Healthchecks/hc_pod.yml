@@ -1,0 +1,20 @@
+#create a pod with liveness probe
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: lp-pod
+spec:
+  containers:
+    - name: lp-container
+      image: httpd
+      command: ["/bin/bash","-c", "touch /tmp/file; sleep 1000"]
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/file
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 30
+

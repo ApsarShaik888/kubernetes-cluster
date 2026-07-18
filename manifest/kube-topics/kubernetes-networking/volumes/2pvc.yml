@@ -1,0 +1,14 @@
+#create a persistent volume claim , manual binding.
+#
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-egs2
+spec:
+  volumeName: egs-pv2
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Gi

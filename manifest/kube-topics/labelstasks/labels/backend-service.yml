@@ -1,0 +1,17 @@
+#create a service connects to backend
+#
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend-service
+spec:
+  selector:
+    env: dev
+    tier: backend 
+
+  ports:
+    - protocol: TCP
+      targetPort: 80
+      port: 80
+  type: ClusterIP

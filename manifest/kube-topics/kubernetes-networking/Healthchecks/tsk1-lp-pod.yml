@@ -1,0 +1,38 @@
+#Create a pod that is healthy for 30 seconds, then becomes unhealthy and gets restarted.
+#Requirements:
+#Pod name: liveness-basic
+#Image: busybox
+#Command: Create a file /tmp/healthy, wait 30 seconds, then delete it
+#Liveness Probe: cat /tmp/healthy
+#initialDelaySeconds: 5
+#periodSeconds: 5
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: liveness-basic
+spec:
+  containers:
+    - name: t1-lpod-container
+      image: busybox
+      command: ["/bin/sh","-c"]
+      args:
+        - |
+          touch /tmp/healthy;
+          echo "container got created and running";
+          sleep 30;
+          rm /tmp/healthy;
+          echo "container crashes and files are missing";
+          sleep 600
+
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 30
+
+
+

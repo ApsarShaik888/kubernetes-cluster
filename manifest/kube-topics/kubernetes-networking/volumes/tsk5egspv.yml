@@ -1,0 +1,14 @@
+#create a Persistent Volume for manual binding..
+#
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: 5egs-pv
+spec:
+  capacity:
+    storage: 4Gi
+  accessModes: 
+    - ReadWriteMany
+  hostPath:
+    path: /ldk/kdata/file.txt
+

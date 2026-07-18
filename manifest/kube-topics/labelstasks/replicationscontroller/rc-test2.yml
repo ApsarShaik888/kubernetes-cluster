@@ -1,0 +1,20 @@
+#create a Replication controller and replicas pods
+#
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: myskilllu-rc
+spec:
+  replicas: 5
+  selector:
+    name: appskill
+  template:
+    metadata:
+      labels:
+        name: appskill
+    spec:
+      containers:
+        - name: myappskillcont
+          image: ubuntu
+          command: ["/bin/bash","-c","while true; do echo Hello, coding girl welcome to ubuntu!;sleep 5;done"]
+

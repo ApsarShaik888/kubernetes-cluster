@@ -1,0 +1,32 @@
+#create a simple web-app and expose with clusterip, nodeport and loadbalancer.
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      obj-app: s-web
+    matchExpressions:
+      - key: environments
+        operator: In
+        values:
+          - staging
+          - dev
+          - production
+  template:
+    metadata:
+      name: simple-webapp
+      labels:
+        obj-app: s-web
+        environments: dev
+    spec:
+      containers:
+        - name: scoship
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          
+

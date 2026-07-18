@@ -1,0 +1,20 @@
+#create a pod with volumes and Pv,PVC manual binding.
+#
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: egs-pod
+spec:
+  containers:
+    - name: conts-egs
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo container is running; sleep 10; done"]
+      volumeMounts:
+        - name: my-storage
+          mountPath: /data-eka
+  volumes:
+    - name: my-storage
+      persistentVolumeClaim:
+         claimName: myegs-pvc
+

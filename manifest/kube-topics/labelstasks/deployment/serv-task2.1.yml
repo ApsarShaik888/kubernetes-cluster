@@ -1,0 +1,15 @@
+#create a service port for deployment ngnix app
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: ngnix-serv
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    obj-type: ngn-dep
+

@@ -1,0 +1,35 @@
+#Create a manifest ,deployment with emptydir and attached volumes
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dep
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+     obj-type: my-dep-vp
+   matchExpressions:
+     - key: env
+       operator: In
+       values: 
+         - dev
+  template:
+    metadata:
+     labels:
+       obj-type: my-dep-vp
+       env: dev
+    spec:
+      containers:
+        - name: my-conta
+          image: ubuntu
+          ports:
+            - containerPort: 80
+          command: ["/bin/bash","-c","while true; do echo 'container is running successfully'; sleep 50; done"]
+          volumeMounts:
+            - name: my-vol
+              mountPath: /tmp/Volumedirectory/msg.txt
+      volumes:
+        - name: my-vol
+          emptyDir: {}
+

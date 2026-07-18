@@ -1,0 +1,15 @@
+# create a pod with label
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: labelpods1
+  labels:
+    day: fri
+    class: kubernetes
+spec:
+  containers:
+    - name: label-pod1
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo hello-welcome to labels session; sleep 6;done"]
+

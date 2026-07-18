@@ -1,0 +1,28 @@
+#create a host file to mapped with pod volume.
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hsdata
+spec:
+  containers:
+    - name: hsd-container
+      image: ubuntu
+      command:
+        - /bin/bash
+        - "-c"
+        - |
+          while true;
+          do
+          echo "Hello,Welcome to kubernetes host path topic";
+          sleep 10;
+          done;
+      volumeMounts:
+        - name: hsd-vol
+          mountPath: /data
+  volumes:
+    - name: hsd-vol
+      hostPath:
+        path: /mnt/task1data
+        type: DirectoryOrCreate
+

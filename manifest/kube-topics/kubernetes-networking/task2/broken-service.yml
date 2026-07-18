@@ -1,0 +1,14 @@
+#Create a service for the broken deployment. go to troubleshoot the issue or errors.
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: brok-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    obj-type: wrong-app
+  type: ClusterIP
+

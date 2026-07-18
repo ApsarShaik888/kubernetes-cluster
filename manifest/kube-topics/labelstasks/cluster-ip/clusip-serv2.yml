@@ -1,0 +1,17 @@
+#create a another service for the same deployment manifest file.
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: dev-service-app2
+  labels:
+    obj-type: dev-ng-app
+    version: v2
+spec:
+  selector:
+    obj-type: dev-ng-app
+  ports:
+    - port: 80
+      targetPort: 80
+      name: ng-engine-x
+  type: ClusterIP

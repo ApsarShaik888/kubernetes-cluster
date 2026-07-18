@@ -1,0 +1,16 @@
+#Create a frontend pod and different labels.
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: frontend-pod
+  labels:
+    app: App1
+    env: dev
+    tier: front-end
+spec:
+  containers:
+    - name: frontend-app
+      image: nginx:latest
+      command: ["/bin/bash","-c", "while true; do echo Hello, welcome; sleep 5; done"]
+

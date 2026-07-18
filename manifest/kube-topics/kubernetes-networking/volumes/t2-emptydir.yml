@@ -1,0 +1,25 @@
+#create a manifest file with multiple containers
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mlti-run
+spec:
+  containers:
+    - name: mul-cont1
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo Hello welcome volume; sleep 10; done"]
+      volumeMounts:
+        - name: mlti-vol
+          mountPath: /tmp/c1-dir
+
+    - name: mul-cont2
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo Hello welcome volume1; sleep 10; done"]
+      volumeMounts:
+        - name: mlti-vol
+          mountPath: /tmp/c2-dir
+
+  volumes:
+    - name: mlti-vol
+      emptyDir: {}

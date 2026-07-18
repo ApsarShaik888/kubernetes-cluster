@@ -1,0 +1,21 @@
+#create a replication controller and jdjjodjewjdwejdkkjw3oejo;wejdojwedkwfkewfkjnwekjfekjnfkjnkjnekfjdoajdlkedkmdsncmdsn,cnds,mfnkjnfkjehhdojwlkdmdknnfmdnndxbdcmdx, cdmxn,mdxncmbdm,nmdncjnzjndxnnfdjfkdsnnfckjnewoidjo2jodskncmdnnfkjewhoijoimdnvm,dscjsc,msenkdowijnkjesnmc z cc,mmzsnckjsejjksjjnlkxnmnsbcs;dslkndjweojnsddsmnckjnkesdlkksejdisemn ksjmzhhckjsndjsj
+#
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: mypod-appc
+spec:
+  replicas: 3
+  selector:
+    name: my-app1
+  template:
+    metadata:
+      labels:
+        name: my-app1  #match with selector name and it is used to link rc selector and pod.
+    spec:
+      containers:
+        - name: coolpodrc
+          image: nginx:latest
+          command: ["/bin/bash","-c","while true; do echo hello welcome rc nginx; sleep 5; done"]
+          
+

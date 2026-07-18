@@ -1,0 +1,16 @@
+#create a persistent volume claim for PV - task4
+#
+kind: PersistentVolumeClaim
+apiVersion: v1
+metada: 
+ name: 4pvc-egs
+spec:
+  volumeName:
+  accessMode:
+    - ReadWriteOnce
+  storageClassName: " "
+  resources:
+    request:
+      storage: 2Gi
+
+

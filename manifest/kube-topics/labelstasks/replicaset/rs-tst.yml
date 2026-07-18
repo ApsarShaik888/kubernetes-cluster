@@ -1,0 +1,38 @@
+# create a replicaset.
+#
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: rs-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+      tier: frontend
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - production
+          - staging
+          - dev
+      - key: version
+        operator: NotIn
+        values:
+          - v1
+          - v2
+  template:
+    metadata:
+      labels:
+        app: my-app
+        tier: frontend
+        environment: staging
+        version: v4
+    spec:
+      containers:
+        - name: rscoo
+          image: nginx:latest
+          command: ["/bin/bash","-c","while true; do echo Welcome to RS,You coding girl;sleep 5;done"]
+
+

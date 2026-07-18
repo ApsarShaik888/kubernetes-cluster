@@ -1,0 +1,23 @@
+#Create a deployment, broken setup inorder to troubleshoot the issue.
+#
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx-debug
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      obj-type: brok-dep
+  template:
+    metadata:
+      labels:
+        obj-type: brok-dep
+    spec:
+      containers:
+        - name: broken-contan
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+

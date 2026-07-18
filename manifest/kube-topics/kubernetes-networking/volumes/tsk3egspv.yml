@@ -1,0 +1,14 @@
+#Create a Persistent Volume with automatic binding. 
+#
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: 3egs-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes: 
+    - ReadWriteOnce
+  hostPath: 
+    path: /hstpth/data
+

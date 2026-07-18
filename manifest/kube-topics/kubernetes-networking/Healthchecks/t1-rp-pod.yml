@@ -1,0 +1,19 @@
+#Create a pod with a readiness probe that checks if a file /tmp/ready exists.
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: rp-pod
+spec:
+  containers:
+    - name: rp-container
+      image: busybox
+      command: ["/bin/sh","-c","while true; do echo 'container is running'; touch /tmp/ready;sleep infinity;done"]
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/ready
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 5

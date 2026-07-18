@@ -1,0 +1,55 @@
+#multi-container pod manifest with MySQL and a client container:
+#
+kind: Pod
+apiVersion: v1
+
+metadata:
+  name: multicontainer-db
+  labels: 
+    app: mysql
+    type: database
+
+spec:
+  containers:
+    - name: mysql-server    #container 1: SQL Server database 
+      image: mysql:latest
+      ports:
+        - containerPort: 3306
+      env:
+        - name: MYSQL_DATABASE
+          value: admintestdb
+        - name: MYSQL_ROOT_PASSWORD
+          value: admin1234
+    
+    #container 2: MySQL client
+    - name: mysql-clientserver
+      image: mysql:latest
+      command: ["/bin/sh"]
+      args:
+        - -c
+        - |
+          echo "Hello, Starting mysql client server.............."
+          echo "Waiting for mysql server to be ready....."
+
+          #wait for mysql server to be available.
+          until mysql -h 127.0.0.1 -u root -padmin1234 -e "SELECT 1" &> /dev/null; do
+          echo "Waiting for mysql server..."
+          sleep 3
+          done
+
+           echo "✅ MySQL server is ready!"
+           echo "You can now connect to MySQL using:"
+           echo "  mysql -h 127.0.0.1 -u root -p"
+           echo ""
+           echo "Keeping container alive for you to exec into..."
+           echo "Try: kubectl exec -it multicontainer-db-pod -c mysql-client -- mysql -h 127.0.0.1 -u root -p"
+           
+          #container to be alive
+           tail -f /dev/null
+           
+      env:
+        - name: MYSQL_PWD
+          value: admin1234 
+
+
+

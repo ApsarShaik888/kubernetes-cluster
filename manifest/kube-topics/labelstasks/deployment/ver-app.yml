@@ -1,0 +1,31 @@
+# create a versioned app and rolling out, rolling update.
+#
+
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dep-ver-app
+  labels:
+    obj-type: dep-version
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      ob-type: dep-version
+  template:
+    metadata:
+      name: rs-ver-app
+      labels:
+        ob-type: dep-version
+        version: v2.0.0
+    spec:
+      containers:
+        - name: dep-conta
+          image: nginx:1.20
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_VERSION
+              value: v1.0.0
+

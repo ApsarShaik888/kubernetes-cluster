@@ -1,0 +1,21 @@
+# create a deployment and deployment object
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: deploy-first
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: deploy-app-first
+  template:
+    metadata:
+      labels:
+        name: deploy-app-first
+    spec:
+      containers:
+        - name: container-app
+          image: ubuntu:22.04
+          command: ["/bin/bash","-c","while true; do echo Hello welcome to first deployment app!;sleep 5; done"]
+

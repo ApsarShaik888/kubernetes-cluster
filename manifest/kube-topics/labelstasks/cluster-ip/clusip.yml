@@ -1,0 +1,22 @@
+#create a deployment manifest file with nginx service.
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dev-applic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      obj-type: dev-ng-app
+  template:
+    metadata:
+      labels:
+        obj-type: dev-ng-app
+    spec:
+      containers:
+        - name: co1
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+

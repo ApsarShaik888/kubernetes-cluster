@@ -1,0 +1,30 @@
+#Create a sample hostpath volumes
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: sampling-host
+spec:
+  containers:
+    - name: host-ola
+      image: ubuntu
+      command:
+        - /bin/bash
+        - "-c"
+        - |
+          while true;
+          do
+          echo "Hello to host-ola containeer"
+          sleep 10;
+          done;
+      volumeMounts:
+        - name: vol-hbc
+          mountPath: /data
+  
+  volumes:
+    - name: vol-hbc
+      hostPath:
+        path: /mnt/host-data
+        type: DirectoryOrCreate
+
+

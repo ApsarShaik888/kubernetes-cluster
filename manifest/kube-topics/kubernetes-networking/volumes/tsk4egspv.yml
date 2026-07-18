@@ -1,0 +1,14 @@
+#create a another persistent Volume with manual binding.
+#
+#
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: 4egs-pv
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostpath: /hspath/manualbinding
+

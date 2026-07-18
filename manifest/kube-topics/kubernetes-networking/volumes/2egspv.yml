@@ -1,0 +1,14 @@
+#create a persistent volume with manual binding.
+#
+#
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: egs-pv2
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/manual

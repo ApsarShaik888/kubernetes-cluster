@@ -1,0 +1,13 @@
+#create Persistent Volume claim for automatic binding
+#
+#
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: 3pvc-com
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce

@@ -1,0 +1,17 @@
+#create a file with emptyDir
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: run-empty
+spec:
+  containers:
+    - name: run-contan
+      image: busybox
+      command: ["/bin/sh","-c","while true; do echo \"$(date): container is running\" >> /cache/log.txt; sleep 10; done"]
+      volumeMounts:
+        - name: cache-storage
+          mountPath: /cache
+  volumes:
+    - name: cache-storage
+      emptyDir: {}

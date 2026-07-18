@@ -1,0 +1,43 @@
+#create a node.js webserver and port 3000 with delay time 10s
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: liveness-node
+spec:
+  containers:
+    - name: lp-node-container
+      image: node:18-alpine
+      command: ["/bin/sh","-c"]
+      args:
+        - |
+          cat > /app/server.js << 'EOF'
+          const http = require('http');
+          const startTime = Date.now();
+          const server = http.createServer((req, res) => {
+            if (req.url === '/health') {
+              const uptime = (Date.now() - startTime) / 1000;
+              if (uptime < 45) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ status: 'healthy', uptime }));
+              }else {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ status: 'unhealthy' }));
+                }
+          } else{
+              res.writeHead(200, { 'Content-Type': 'text/plain' });
+              res.end('Hello from Node.js!');
+              }
+           });
+          server.listen(3000, () => console.log('Server running on port 3000'));
+          EOF
+          node /app/server.js
+      ports:
+        - containerPort: 3000
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 3000
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        failureThreshold: 3

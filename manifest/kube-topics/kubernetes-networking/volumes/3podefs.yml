@@ -1,0 +1,19 @@
+#create a pod with persistent Volume and persistent Volume claim.
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: 3pod-efs
+spec:
+  containers:
+    - name: pod-3egs-conta
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo Welcome my container and it is running;sleep 10; done"]
+      volumeMounts:
+        - name: 3cont-vol
+          mountPath: /data/3podegs
+  volumes:
+    - name: 3cont-vol
+      persistentVolumeClaim:
+        claimName: 3pvc-com 
+

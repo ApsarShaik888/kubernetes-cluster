@@ -1,0 +1,28 @@
+#create a deployment object with nginx service.
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ng-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      obj-type: service-ng
+  template:
+    metadata:
+      labels:
+        obj-type: service-ng
+    spec:
+      containers:
+        - name: contain-1
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          command: ["/bin/bash","-c","while true; do echo welcome to nginx dep app launch 1.1o!; sleep 5; done"]
+
+        - name: contain-2
+          image: nginx:1.26.2
+          ports:
+            - containerPort: 8080
+          command: ["/bin/bash","-c","while true; do echo welcome to nginx dep app launch 2.1o; sleep 5; done"]

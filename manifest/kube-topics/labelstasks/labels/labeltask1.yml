@@ -1,0 +1,16 @@
+#Create a pod and add labels to the pod.
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: labelpod
+  labels:
+    app: my-app
+    env: dev
+    class: kubernetes
+    version: v1
+spec:
+  containers:
+    - name: labeltaskpod
+      image: nginx:latest
+      command: ["/bin/bash","-c", "while true; do echo Hello welcome to nginx; sleep 6; done"]

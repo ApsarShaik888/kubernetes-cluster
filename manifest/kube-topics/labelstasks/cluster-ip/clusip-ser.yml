@@ -1,0 +1,15 @@
+#create a service for the deployment object clusip
+#
+#
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-demo-clusterip
+spec:
+  selector:
+    obj-type: dev-ng-app
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+  type: ClusterIP

@@ -1,0 +1,20 @@
+#create a pod with pvc and pv
+#
+kind: Pod
+apiVersion: v1
+metadata:
+  name: 4-pod-egs
+spec:
+  containers:
+    - name: 4pod-container
+      image: httpd:latest
+      command: ["/bin/bash","-c","while do echo welcome containers are running!;sleep 10; done"]
+      volumeMount:
+        - volumeName: gd-ed
+          mountPath: /kim/gdvol
+  volumes:
+    - volumeName: gd-ed
+      persistantVolumeClaim:
+        - volumeClaim: 4pvc-egs 
+
+

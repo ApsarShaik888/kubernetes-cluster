@@ -1,0 +1,23 @@
+#Deploy an Nginx web server with 3 replicas and expose it via a NodePort service
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      obj-type: ngn-dep
+  template:
+    metadata:
+      labels:
+        obj-type: ngn-dep
+    spec:
+      containers:
+        - name: ngnix-container
+          image: nginx:latest
+          command: ["/bin/bash","-c","while true; do echo ngnix app is running; sleep 10; done"]
+          ports:
+            - containerPort: 80
+

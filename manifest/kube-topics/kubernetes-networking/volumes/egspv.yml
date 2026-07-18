@@ -1,0 +1,15 @@
+#create a persistant volume and test 
+#
+#
+#
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: myegs-pvc
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/cka-data
